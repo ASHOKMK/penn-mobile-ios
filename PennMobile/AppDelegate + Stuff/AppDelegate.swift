@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LaundryNotificationCenter.shared.prepare()
         
         // Firebase
-        FIRApp.configure();
+        FirebaseApp.configure();
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -198,8 +198,8 @@ extension AppDelegate: OnboardingDelegate {
     }
 }
 
-extension AppDelegate: FIRMessagingDelegate {
-    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+extension AppDelegate: MessagingDelegate {
+    func application(received remoteMessage: MessagingRemoteMessage) {
         print("Received data message: \(remoteMessage.appData)")
     }
 }

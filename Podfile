@@ -11,7 +11,7 @@ pod 'Google/Analytics'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'SwiftyJSON'
 pod 'PromiseKit'
-pod 'Firebase/Core'	
+pod 'Firebase', '~> 4.7'
 pod 'Firebase/Messaging'
 
   target 'PennMobileTests' do
