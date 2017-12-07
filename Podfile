@@ -11,6 +11,8 @@ pod 'Google/Analytics'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'SwiftyJSON'
 pod 'PromiseKit'
+pod 'Firebase/Core'	
+pod 'Firebase/Messaging'
 
   target 'PennMobileTests' do
     inherit! :search_paths

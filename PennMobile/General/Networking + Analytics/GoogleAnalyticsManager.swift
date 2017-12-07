@@ -15,6 +15,7 @@ import UIKit
     
     static func prepare() {
         let gai = GAI.sharedInstance()
+        print("google prepares")
         gai?.trackUncaughtExceptions = true
         gai?.dryRun = shared.dryRun //prevents GoogleAnalytics tracking (remove before production release)
         //gai?.logger.logLevel = .verbose //MUST COMMENT OUT BEFORE RELEASE
@@ -23,6 +24,7 @@ import UIKit
     }
     
     @objc func trackScreen(_ name: String) {
+        print("google track screen: \(name)")
         GAI.sharedInstance().defaultTracker?.set(kGAIScreenName, value: name)
         
         let builder = GAIDictionaryBuilder.createScreenView()
@@ -32,6 +34,7 @@ import UIKit
     }
     
     @objc func trackEvent(category: String, action: String, label: String, value: NSNumber) {
+        print("google track events \(category)")
         GAI.sharedInstance().defaultTracker?.send(GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: value).build() as! [AnyHashable : Any]!)
     }
     

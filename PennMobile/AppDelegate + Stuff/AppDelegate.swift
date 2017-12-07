@@ -8,9 +8,14 @@
 
 import UIKit
 import UserNotifications
+import FirebaseCore
+import FirebaseInstanceID
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let gcmMessageIDKey = "gcm.message_id"
 
     var window: UIWindow?
     var swRevealViewController: SWRevealViewController!
@@ -28,6 +33,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GoogleAnalyticsManager.prepare()
         LaundryAPIService.instance.prepare()
         LaundryNotificationCenter.shared.prepare()
+        
+        // Firebase
+        FIRApp.configure();
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+
         
         if !UserDefaults.standard.isOnboarded() {
             handleOnboarding(animated: true)
@@ -173,6 +195,50 @@ extension AppDelegate: OnboardingDelegate {
         navController.viewControllers = [homeController]
         presentSWController()
         //registerForPushNotifications()
+    }
+}
+
+extension AppDelegate: FIRMessagingDelegate {
+    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler()
     }
 }
 
