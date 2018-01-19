@@ -13,6 +13,7 @@ pod 'SwiftyJSON'
 pod 'PromiseKit'
 pod 'Firebase', '~> 4.7'
 pod 'Firebase/Messaging'
+pod 'SCLAlertView'
 
   target 'PennMobileTests' do
     inherit! :search_paths

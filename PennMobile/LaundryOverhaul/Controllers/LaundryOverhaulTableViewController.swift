@@ -6,8 +6,14 @@
 //  Copyright © 2017 PennLabs. All rights reserved.
 //
 
-class LaundryOverhaulTableViewController: GenericTableViewController, IndicatorEnabled, ShowsAlert {
-    
+import UIKit
+import UserNotifications
+import FirebaseCore
+import FirebaseInstanceID
+import FirebaseMessaging
+import SCLAlertView
+
+class LaundryOverhaulTableViewController: GenericTableViewController, IndicatorEnabled, ShowsAlert, NotificationRequestable {
     internal var halls = [LaundryHall]()
     
     fileprivate let laundryCell = "laundryCell"
@@ -32,17 +38,25 @@ class LaundryOverhaulTableViewController: GenericTableViewController, IndicatorE
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(handleEditPressed))
         
+        
         // Start indicator if there are cells that need to be loaded
         if !halls.isEmpty {
             showActivity()
         }
+        
+        // Notification with NotificationRequestable
+        requestNotification()
+        
     }
+    
+    // end
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateInfo {
             self.hideActivity()
         }
+
     }
     
     fileprivate func reloadCellsButNotTable() {
