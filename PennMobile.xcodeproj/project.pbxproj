@@ -109,6 +109,8 @@
 		CF29A1751FB788820067D946 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29A1651FB7887C0067D946 /* Page.swift */; };
 		CF29A1771FB788820067D946 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29A1671FB7887E0067D946 /* OnboardingController.swift */; };
 		CF29A1781FB788820067D946 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29A1681FB7887E0067D946 /* PageCell.swift */; };
+		CF672B09205EF5070076CE87 /* HomeFeedbackCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF672B08205EF5070076CE87 /* HomeFeedbackCellItem.swift */; };
+		CF672B0B205EF5280076CE87 /* HomeFeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF672B0A205EF5280076CE87 /* HomeFeedbackCell.swift */; };
 		CF7FCA761FAFCD9E0052F0A9 /* RoomSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7FCA751FAFCD9E0052F0A9 /* RoomSelectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -238,6 +240,8 @@
 		CF29A1651FB7887C0067D946 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		CF29A1671FB7887E0067D946 /* OnboardingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingController.swift; sourceTree = "<group>"; };
 		CF29A1681FB7887E0067D946 /* PageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		CF672B08205EF5070076CE87 /* HomeFeedbackCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedbackCellItem.swift; sourceTree = "<group>"; };
+		CF672B0A205EF5280076CE87 /* HomeFeedbackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedbackCell.swift; sourceTree = "<group>"; };
 		CF7FCA751FAFCD9E0052F0A9 /* RoomSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSelectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +287,7 @@
 		21640D4620104354002F33CA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				CF672B07205EF4E70076CE87 /* Feedback */,
 				211DA1AA20490E4D0065BC2C /* HomeCellConformable.swift */,
 				217A784A204DDF05004F1227 /* Dining */,
 				217A784B204DDF0C004F1227 /* Laundry */,
@@ -727,6 +732,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		CF672B07205EF4E70076CE87 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				CF672B08205EF5070076CE87 /* HomeFeedbackCellItem.swift */,
+				CF672B0A205EF5280076CE87 /* HomeFeedbackCell.swift */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -961,6 +975,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B650C5681FA44C2100922E98 /* LaundryMachineCell.swift in Sources */,
+				CF672B0B205EF5280076CE87 /* HomeFeedbackCell.swift in Sources */,
 				219F01F41FB7CCFA006BBC4E /* SAConfettiView.swift in Sources */,
 				219F01FB1FBE973A006BBC4E /* LaundryNotificationCenter.swift in Sources */,
 				2189C0A22027CE4100771C1F /* GSRRoom.swift in Sources */,
@@ -978,6 +993,7 @@
 				21879B1E1FB3FF54003CF552 /* Storage.swift in Sources */,
 				2180D2352013F65C008C94CF /* HomeAPIService.swift in Sources */,
 				CF29A1771FB788820067D946 /* OnboardingController.swift in Sources */,
+				CF672B09205EF5070076CE87 /* HomeFeedbackCellItem.swift in Sources */,
 				21640D6020105BB4002F33CA /* HomeStudyRoomCell.swift in Sources */,
 				2189C08F2027CE2600771C1F /* EmptyView.swift in Sources */,
 				2189C0832027CDB800771C1F /* GSRBookable.swift in Sources */,
