@@ -88,8 +88,26 @@ extension HomeFeedbackCell {
     
     fileprivate func prepareStarButton(for star: UIButton, index: Int) {
         star.setImage(#imageLiteral(resourceName: "DefaultState"), for: .normal)
+        star.addTarget(self, action: #selector(didSelectStarAt(sender:)), for: .touchUpInside)
         star.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
         star.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
         starGroup.addArrangedSubview(star)
+    }
+    
+    @objc func didSelectStarAt(sender: UIButton) {
+        var counter = 0
+        for star in stars {
+            star.setImage(#imageLiteral(resourceName: "ApprovalState"), for: .normal)
+            counter += 1
+            if star == sender {
+                break
+            }
+        }
+        for star in stars {
+            counter -= 1
+            if (counter < 0) {
+                star.setImage(#imageLiteral(resourceName: "DisapprovalState"), for: .normal)
+            }
+        }
     }
 }
