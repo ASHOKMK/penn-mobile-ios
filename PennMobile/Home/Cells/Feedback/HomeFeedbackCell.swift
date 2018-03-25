@@ -16,7 +16,7 @@ final class HomeFeedbackCell: UITableViewCell, HomeCellConformable {
     var delegate: ModularTableViewCellDelegate!
     
     static func getCellHeight(for item: ModularTableViewItem) -> CGFloat {
-        return 150.0
+        return 160.0
     }
     
     // UI Elements
@@ -59,6 +59,11 @@ final class HomeFeedbackCell: UITableViewCell, HomeCellConformable {
 
 // MARK: - Prepare UI
 extension HomeFeedbackCell {
+    
+    public var screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    
     fileprivate func prepareUI() {
         prepareLabel()
         prepareStarGroup()
@@ -83,14 +88,22 @@ extension HomeFeedbackCell {
             counter += 1
         }
         cardView.addSubview(starGroup)
-        _ = starGroup.anchor(titleLabel.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, topConstant: 10, leftConstant: 45, bottomConstant: 20, rightConstant: 45, widthConstant: 0, heightConstant: 0)
+        print("\n\n###### \nScreen Width: \(screenWidth)\n########\n")
+        switch screenWidth {
+        case _ where screenWidth < 350: // iPhone 5 or 5S or 5C or SE
+            _ = starGroup.anchor(titleLabel.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, topConstant: 10, leftConstant: 15, bottomConstant: 20, rightConstant: 15, widthConstant: 0, heightConstant: 0)
+        case _ where screenWidth > 350 && screenWidth < 380: // iPhone 6 or 7 or 8
+            _ = starGroup.anchor(titleLabel.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, topConstant: 10, leftConstant: 45, bottomConstant: 20, rightConstant: 45, widthConstant: 0, heightConstant: 0)
+        default:
+            _ = starGroup.anchor(titleLabel.bottomAnchor, left: cardView.leftAnchor, bottom: cardView.bottomAnchor, right: cardView.rightAnchor, topConstant: 10, leftConstant: 55, bottomConstant: 20, rightConstant: 55, widthConstant: 0, heightConstant: 0)
+        }
     }
     
     fileprivate func prepareStarButton(for star: UIButton, index: Int) {
         star.setImage(#imageLiteral(resourceName: "DefaultState"), for: .normal)
         star.addTarget(self, action: #selector(didSelectStarAt(sender:)), for: .touchUpInside)
-        star.widthAnchor.constraint(equalToConstant: 25.0).isActive = true
-        star.heightAnchor.constraint(equalToConstant: 25.0).isActive = true
+        star.widthAnchor.constraint(equalToConstant: 35.0).isActive = true
+        star.heightAnchor.constraint(equalToConstant: 35.0).isActive = true
         starGroup.addArrangedSubview(star)
     }
     
