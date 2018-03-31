@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import StoreKit
 
 final class HomeFeedbackCell: UITableViewCell, HomeCellConformable {
     static var identifier: String = "homeFeedbackCell"
@@ -115,12 +116,23 @@ extension HomeFeedbackCell {
             if star == sender {
                 break
             }
+            if (counter >= 4) {
+                openInAppRating()
+            }
         }
         for star in stars {
             counter -= 1
             if (counter < 0) {
                 star.setImage(#imageLiteral(resourceName: "DisapprovalState"), for: .normal)
             }
+        }
+    }
+    
+    fileprivate func openInAppRating() {
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        } else {
+            // Fallback on earlier versions
         }
     }
 }
